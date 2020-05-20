@@ -1,0 +1,52 @@
+1.ACess logs time stamp processing time
+
+Go to the Logging tab and then to the HTTP tab.
+Click on the Advanced link to open the advanced options.
+Select the Extended option from the Format drop-down menu.
+ Type " c-ip date time cs-method cs-uri sc-status bytes time-taken " in Extended Logging Format Fields and click on the Save button.
+Click on the Activate Changes button to finish.
+Repeat the preceding steps for other managed servers you wish to do the same task.
+
+
+
+
+2.Datasource URL using service 
+
+jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(LOAD_BALANCE=ON)(PROTOCOL=TCP)(HOST=pgprod-scan.fssnet.india)(PORT=1527)))(ENABLE=BROKEN)(CONNECT_DATA=(SERVICE_NAME=oripyprd_svc)))
+
+
+
+
+
+
+3.Audit eventsd enabling 
+
+To enable the Administration Server to emit configuration auditing messages:
+
+If you have not already done so, in the Change Center of the Administration Console, click Lock & Edit (see Use the Change Center).
+In the left pane of the Console, under Domain Structure, select the domain name.
+Select Configuration > General, then click Advanced at the bottom of the page.
+In the Configuration Audit Type field, select the method to be used for auditing configuration change events:
+None - do not audit configuration change events
+
+Change Log and Audit - Configuration events will written to the server log as well as directed to the Security Framework and handled by the Auditing provider.
+
+
+Click Save.
+To activate these changes, in the Change Center of the Administration Console, click Activate Changes.
+Not all changes take effect immediately—some require a restart (see Use the Change Center).
+
+Go to security realms.
+
+myrealm>providers>auditing>new>name(defaultAUDIT)>providerspecific>In severity(INFROMATION)>selesct ALL> Advanced>
+
+
+
+
+4.Heap dump on OOM issue parameter - AIX
+
+-Xdump:system:none
+
+-Xdump:java+snap+heap:events=systhrow,filter=java/lang/OutOfMemoryError,range=1..3
+
+-Xdump:directory=/wllogs/HeapDumps/Test
